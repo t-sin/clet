@@ -8,6 +8,10 @@
 
 ## Memo
 
+### Implementation specific
+
+- [Timer API on SBCL](http://www.sbcl.org/manual/#Timers)
+
 ### GNU/Linux
 
 - [HPET usage in GNU/Linux](http://www.ftechworks.mydns.jp/wiki/index.php?HPET%20API%20-%20%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88)
