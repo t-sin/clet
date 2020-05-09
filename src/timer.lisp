@@ -6,15 +6,43 @@
            #:timer-type
            #:timer-fn
            #:timer-scheduled-p
-           #:timerobj
-           #:*timers*))
+           #:*timers*
+           #:list-all-timers
+           #:schedule-timer
+           #:unschedule-timer))
 (in-package #:clet.timer)
 
-(defstruct timer
-  (name "default" :type string)
-  (type :normal :type (member :normal :hpet))
-  (fn nil :type function)
-  (scheduled-p nil)
-  (timerobj nil))
+(defclass timer ()
+  ((name :type string
+         :initarg :name
+         :initform "default"
+         :accessor timer-name)
+   (type :type (member :normal :hpet)
+         :initarg :name
+         :initform :normal
+         :accessor timer-type)
+   (fn :type function
+       :initarg :fn
+       :initform #'identity
+       :accessor timer-fn)
+   (scheduled-p :type (member t nil)
+                :initarg :scheduled-p
+                :initform nil
+                :accessor timer-scheduled-p)))
 
 (defparameter *timers* '())
+
+(defun list-all-timers ()
+  *timers*)
+
+(defgeneric make-timer (name type fn))
+(defgeneric schedule-timer (timer))
+(defgeneric unschedule-timer (timer))
+
+(defmethod schedule-timer :after ((timer timer))
+  (setf (timer-scheduled-p timer) t)
+  (push timer *timers*))
+
+(defmethod unschedule-timer :after ((timer timer))
+  (setf (timer-scheduled-p timer) nil)
+  (setf *timers* (remove-if (lambda (tm) (eq tm timer)) *timers*)))

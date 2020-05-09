@@ -4,8 +4,7 @@
            #:timer-name
            #:time-type
            #:timer-scheduled-p
+           #:schedule-timer
+           #:unschedule-timer
            #:list-all-timers))
 (in-package #:clet)
-
-(defun list-all-timers ()
-  *timers*)
