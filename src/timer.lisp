@@ -19,7 +19,7 @@
          :initform "default"
          :accessor timer-name)
    (type :type (member :normal :hpet)
-         :initarg :name
+         :initarg :type
          :initform :normal
          :accessor timer-type)
    (fn :type function
@@ -36,11 +36,11 @@
 (defun list-all-timers ()
   *timers*)
 
-(defgeneric make-timer (name type fn &key &allow-other-keys))
-(defgeneric schedule-timer (timer))
+(defgeneric make-timer (name type fn &rest rest &key &allow-other-keys))
+(defgeneric schedule-timer (timer time &rest keys &key &allow-other-keys))
 (defgeneric unschedule-timer (timer))
 
-(defmethod schedule-timer :after ((timer timer))
+(defmethod schedule-timer :after (timer time &rest keys &key &allow-other-keys)
   (setf (timer-scheduled-p timer) t)
   (push timer *timers*))
 
