@@ -7,6 +7,7 @@
            #:timer-fn
            #:timer-scheduled-p
            #:*timers*
+           #:make-timer
            #:list-all-timers
            #:schedule-timer
            #:unschedule-timer))
@@ -35,7 +36,7 @@
 (defun list-all-timers ()
   *timers*)
 
-(defgeneric make-timer (name type fn))
+(defgeneric make-timer (name type fn &key &allow-other-keys))
 (defgeneric schedule-timer (timer))
 (defgeneric unschedule-timer (timer))
 
