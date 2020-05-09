@@ -2,6 +2,14 @@
 
 *clet* provides portable API for event timers (including HPET (High Precision Event Timer)).
 
+## TODOs
+
+- [x] basic API
+- [x] support SBCL timer API
+- [ ] GNU/Linux HPET API
+- [ ] Windows HPET API
+- [ ] fix API
+
 ## Requirements
 
 - Windows 10 or GNU/Linux (x.x.x or later)
